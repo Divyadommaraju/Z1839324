@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Future Value Calculator</title>
+  <script>
+  var $=function (id){
+    return document.getElementById(id);
+  }
+  var calculateFV = function(){
+
+    var total_investment=parseFloat($("total_investment").value);
+    var years=parseFloat($("years").value);
+    var interest=parseFloat($("interest").value);
+
+    if(total_investment<=0 || total_investment>100000){
+      alert("Investment should be bigger than zero but smaller than or equal to 100,000");
+    }
+    else if(interest<=0 || interest>15){
+      alert("Interest should be bigger than zero but smaller than or equal to 15%");
+    }
+    else if(years<=0 || years>50){
+      alert("The years should be bigger than zero but smaller than or equal to 50 years");
+    }
+    else {
+      /*var future_value=total_investment*((1+(interest/100))^years);*/
+      var future_value=total_investment*Math.pow(1+(interest/100),years)
+        $("future_value").value = future_value.toFixed(1);
+    }
+  }
+
+  window.onload = function () {
+      $("calculate").onclick = calculateFV;
+    }
+
+  </script>
+</head>
+<body>
+
+        <h1>Future Value Calculator</h1>
+
+        <label>Total Investment:</label>
+        <input type="text" id="total_investment"><br>
+
+        <label>Annual Interest Rate:</label>
+        <input type="text" id="interest">%<br>
+
+        <label>Number of Years:</label>
+        <input type="text" id="years"><br>
+
+        <label>Future Value:</label>
+        <input type="text" id="future_value" disabled><br>
+
+        <label> </label>
+        <input type="button" id="calculate" value="Calculate"><br>
+
+</body>
+</html>
